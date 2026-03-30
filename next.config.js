@@ -12,19 +12,35 @@ const config = {
 		// Note: API rate limiting is handled by RequestQueue in src/lib/graphql.ts
 		// (max 3 concurrent requests + 200ms delay between requests)
 	},
+	cacheComponents: true,
+	experimental: {
+		optimizePackageImports: ["lucide-react", "lodash-es"],
+	},
 	images: {
+		// Remove this line:
+		// unoptimized: true,
+
 		remotePatterns: [
 			{
-				// Saleor Cloud CDN
 				hostname: "*.saleor.cloud",
 			},
 			{
-				// Saleor Media (common pattern)
 				hostname: "*.media.saleor.cloud",
 			},
 			{
-				// Allow all hostnames in development (restrict in production)
 				hostname: "*",
+			},
+			{
+				protocol: "http",
+				hostname: "127.0.0.1",
+				port: "8000",
+				pathname: "/media/**",
+			},
+			{
+				protocol: "http",
+				hostname: "localhost",
+				port: "8000",
+				pathname: "/media/**",
 			},
 		],
 	},
