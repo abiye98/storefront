@@ -42,7 +42,7 @@ export default async function Page(props: PageProps) {
 		<>
 			{/* Static shell - renders immediately */}
 			<CategoryHero
-				title="All Products"
+				title="Alle Produkte"
 				description="Discover our full collection of premium products."
 				breadcrumbs={breadcrumbs}
 			/>

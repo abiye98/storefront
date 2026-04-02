@@ -18,8 +18,7 @@ const config = {
 	},
 	images: {
 		// Remove this line:
-		// unoptimized: true,
-
+		unoptimized: true,
 		remotePatterns: [
 			{
 				hostname: "*.saleor.cloud",

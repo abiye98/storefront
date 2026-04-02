@@ -3,6 +3,9 @@ import { ProductListByCollectionDocument, ProductOrderField, OrderDirection } fr
 import { executePublicGraphQL } from "@/lib/graphql";
 import { CACHE_PROFILES, applyCacheProfile } from "@/lib/cache-manifest";
 import { ProductList } from "@/ui/components/product-list";
+import { SelfCheckoutScanner } from "@/ui/components/self-checkout-trigger";
+// import { SelfCheckoutScanner } from "@/ui/components/self-checkout-scanner";
+import { CategoryCards } from "@/ui/components/product-category";
 
 export const metadata = {
 	title: "ACME Storefront, powered by Saleor & Next.js",
@@ -43,7 +46,7 @@ async function getFeaturedProducts(channel: string) {
  * The async product grid streams inside its own Suspense boundary
  * so it doesn't rely on the layout's main Suspense for reconciliation.
  */
-export default function Page(props: { params: Promise<{ channel: string }> }) {
+export default async function Page(props: { params: Promise<{ channel: string }> }) {
 	return (
 		<section className="mx-auto max-w-7xl p-8 pb-16">
 			<h2 className="sr-only">Product list</h2>
@@ -69,7 +72,17 @@ export default function Page(props: { params: Promise<{ channel: string }> }) {
 					</ul>
 				}
 			>
-				<FeaturedProducts params={props.params} />
+				<div className="mb-8 flex justify-end">
+					<Suspense fallback={<div className="h-10 w-36 animate-pulse rounded bg-secondary" />}>
+						<SelfCheckoutScanner channel={(await props.params).channel} />
+					</Suspense>
+				</div>
+
+				<div className="mb-8 flex justify-center">
+					<Suspense fallback={<div className="h-10 w-36 animate-pulse rounded bg-secondary" />}>
+						<CategoryCards channel={(await props.params).channel} />
+					</Suspense>
+				</div>
 			</Suspense>
 		</section>
 	);
@@ -80,4 +93,16 @@ async function FeaturedProducts({ params: paramsPromise }: { params: Promise<{ c
 	const products = await getFeaturedProducts(channel);
 
 	return <ProductList products={products} />;
+}
+
+{
+	/* Self-Checkout Scanner - direkt über FeaturedProducts */
+}
+{
+	/* <div className="mb-12">
+					<SelfCheckoutTrigger />
+				</div> */
+}
+{
+	/* <FeaturedProducts params={props.params} /> */
 }

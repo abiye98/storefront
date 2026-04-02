@@ -59,7 +59,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
 		<article className="group">
 			<Link href={product.href} className="block">
 				{/* Image Container */}
-				<div className="relative mb-4 aspect-[3/4] overflow-hidden rounded-xl bg-secondary">
+				<div className="relative mb-4 aspect-square overflow-hidden rounded-xl bg-secondary">
 					{/* Primary Image */}
 					<Image
 						src={product.image}

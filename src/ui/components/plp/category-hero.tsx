@@ -18,7 +18,7 @@ export function CategoryHero({ title, description, backgroundImage, breadcrumbs 
 	const hasImage = !!backgroundImage;
 
 	return (
-		<section className="relative h-[340px] overflow-hidden border-b border-border">
+		<section className="relative h-[240px] overflow-hidden border-b border-border">
 			{/* Background */}
 			<div className="absolute inset-0">
 				{hasImage ? (
